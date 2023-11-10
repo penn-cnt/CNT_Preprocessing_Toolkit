@@ -1,0 +1,3 @@
+filename,start,stop,selec,ignore
+HUP172_phaseII,402580,402600,"LE10,LE11,LH01,LH02,LH03,LH04",
+HUP212_phaseII,100000,100015,,

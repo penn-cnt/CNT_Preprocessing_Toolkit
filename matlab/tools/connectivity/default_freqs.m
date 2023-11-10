@@ -1,0 +1,19 @@
+function freqs = default_freqs
+
+% default_freqs Returns a set of canonical frequency ranges.
+
+% Output:
+%   freqs - A matrix where each row represents a frequency range. The first
+%           column is the lower bound, and the second column is the upper
+%           bound of the frequency range. Sequence: delta, theta, alpha,
+%           beta, gamma, ripple, broadband.
+
+freqs = [0.5 4;...
+    4 8;...
+    8 12;...
+    12 30;...
+    30 80;...
+    80 250;...
+    0.5 250;];
+
+end

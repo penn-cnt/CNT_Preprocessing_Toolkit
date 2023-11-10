@@ -1,0 +1,3 @@
+filename,start,stop,out,notes
+HUP172_phaseII,402580,402600,/,correctCase1
+HUP212_phaseII,100000,100015,/,correctCase2

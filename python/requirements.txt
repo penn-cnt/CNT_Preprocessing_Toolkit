@@ -1,0 +1,13 @@
+cachetools==5.2.0
+pennprov==2.2.4
+pyqt5-sip==12.9.0
+install==1.3.5
+scipy==1.8.1
+matplotlib==3.5.2
+matplotlib-inline==0.1.3
+seaborn==0.11.2
+git+https://github.com/ieeg-portal/ieegpy.git
+pytest
+beartype
+pytest-html
+scikit-learn

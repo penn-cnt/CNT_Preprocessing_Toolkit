@@ -1,0 +1,3 @@
+filename,start,stop,selecElecs,ignoreElecs
+HUP172_phaseII,402580,402600,,"EKG1, EKG2"
+HUP212_phaseII,100000,100015,,"EKG1, EKG2"

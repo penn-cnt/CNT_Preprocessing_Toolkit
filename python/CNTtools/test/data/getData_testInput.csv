@@ -1,0 +1,12 @@
+filename,start,stop,out,selec,ignore,notes
+HUP172_phaseII,402580,402600,/,,,correctCase1
+HUP212_phaseII,100000,100015,/,,,correctCase2
+HAP210_,10000,10015,CNTtools:invalidFileName,,,invalidFilename
+HUP077_phaseII,10000,10015,CNTtools:emptyFile,,,emptyFile
+HUP060_phaseIV,20020,20000,CNTtools:invalidTimeRange,,,stopBeforeStart
+HUP101_phaseII_D01,1000000,1000015,CNTtools:invalidTimeRange,,,outrangeTime1
+HUP212_phaseII,-30,0,CNTtools:invalidTimeRange,,,outrangeTime2
+HUP212_phaseII,100000,100001,/,"['LA1','LA2']",,electrodeCase1
+HUP212_phaseII,100000,100001,/,,"['LA1','LA2']",electrodeCase2
+HUP212_phaseII,100000,100001,/,"[1,2]",,electrodeCase3
+HUP212_phaseII,100000,100001,/,,"[1,2]",electrodeCase4
