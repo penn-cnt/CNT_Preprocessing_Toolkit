@@ -1,0 +1,29 @@
+name: MATLAB Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - './matlab/**' 
+  workflow_dispatch: 
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v1
+        with:
+          matlab-version: R2021b  # Adjust to your MATLAB version
+          license-server: your-license-server-address  # Optional if using a network license
+
+      - name: Run MATLAB Unit Tests
+        run: |
+          matlab -batch "runtests('test','IncludeSubfolders',true)"
+        working-directory: ./matlab
+
