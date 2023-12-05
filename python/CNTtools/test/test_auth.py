@@ -33,6 +33,6 @@ def test_auth():
             if i.endswith('.json'):
                 with open(os.path.join(settings.USER_DIR, i), "rb") as f:
                     config = pd.read_json(f, typ="series")
-            assert os.path.exists(os.path.join(settings.USER_DIR, config.pwd))
+            assert os.path.exists(os.path.join(settings.USER_DIR, config['pwd']))
             pwd = open(os.path.join(settings.USER_DIR, config.pwd), "r").read()
-            s = Session(config.usr, pwd)
+            s = Session(config['usr'], pwd)
