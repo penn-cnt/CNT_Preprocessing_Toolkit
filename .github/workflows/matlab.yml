@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - './matlab/**' 
+      - 'matlab/**' 
   pull_request:
     branches: [ "main" ]
     paths:
-      - './matlab/**' 
+      - 'matlab/**' 
   #workflow_dispatch: 
 
 jobs:
