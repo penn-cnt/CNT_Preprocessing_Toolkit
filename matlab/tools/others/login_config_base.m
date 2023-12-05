@@ -4,8 +4,8 @@ function usr = login_config_base(varargin)
     % added variable input for testing purposes
 
     p = inputParser;
-    addOptional(p, 'username', "", @(x) isstring(x) || ischar(x));
-    addOptional(p, 'password', "", @(x) isstring(x) || ischar(x));
+    addOptional(p, 'username', '', @(x) isstring(x) || ischar(x));
+    addOptional(p, 'password', '', @(x) isstring(x) || ischar(x));
     parse(p, varargin);
     username = p.Results.values;
     password = p.Results.labels;
