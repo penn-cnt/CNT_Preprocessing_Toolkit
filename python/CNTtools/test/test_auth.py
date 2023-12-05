@@ -12,6 +12,7 @@ from CNTtools.tools import create_pwd_file
 
 def test_auth():
     assert os.path.exists(settings.USER_DIR)
+    config = {}
     if os.getenv('GITHUB_ACTIONS'):
         config['usr'] = os.getenv('IEEG_USERNAME')
         config['pwd'] = os.getenv('IEEG_PASSWORD')
