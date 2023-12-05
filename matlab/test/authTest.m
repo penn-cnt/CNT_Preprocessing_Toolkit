@@ -13,8 +13,8 @@ classdef authTest < matlab.unittest.TestCase
                 % Use GitHub secrets to retrieve credentials
                 usr = getenv('IEEG_USERNAME');
                 pwd = getenv('IEEG_PASSWORD');
-                disp(class(usr))
-                disp(class(pwd)) % remove after checking
+                disp(isstring(usr) || ischar(usr))
+                disp(isstring(pwd) || ischar(pwd)) % remove after checking
                 login_config_base(usr,pwd)
             end
             files = dir(fullfile(USER_DIR,'*.json'));
