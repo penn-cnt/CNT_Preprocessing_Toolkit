@@ -68,7 +68,7 @@ runtests('matlab/test','IncludeSubfolders',true);
 
 During usage of toolkit, folders users and data would be created under the python/CNTtools or matlab folder to store user login information and data files, respectively.
 
-## Login Congiguration
+## Login Configuration
 
 The toolkit currently depends on ieeg.org.
 
