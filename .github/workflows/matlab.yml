@@ -41,7 +41,8 @@ jobs:
         run: cat test_results.xml
 
       - name: Parse and Display Test Results
-        uses: actions/junit-report@v2
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure() # always run even if the previous step fails
         with:
-          path: test_results.xml
+          report_paths: 'test_results.xml'
 
