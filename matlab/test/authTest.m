@@ -11,11 +11,11 @@ classdef authTest < matlab.unittest.TestCase
             assert(exist(USER_DIR,'dir') == 7);
             if ~isempty(getenv('GITHUB_ACTIONS'))
                 % Use GitHub secrets to retrieve credentials
-                login.usr = getenv('IEEG_USERNAME');
-                login.pwd = getenv('IEEG_PASSWORD');
-                disp(login.usr)
-                disp(login.pwd) % remove after checking
-                login_config_base(login.usr,login.pwd)
+                usr = getenv('IEEG_USERNAME');
+                pwd = getenv('IEEG_PASSWORD');
+                disp(class(usr))
+                disp(class(pwd)) % remove after checking
+                login_config_base(usr,pwd)
             end
             files = dir(fullfile(USER_DIR,'*.json'));
             if isempty(files)
