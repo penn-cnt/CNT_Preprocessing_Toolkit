@@ -12,6 +12,10 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
 
+    env:
+      IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
+      IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -20,7 +24,6 @@ jobs:
         uses: matlab-actions/setup-matlab@v1
         with:
           matlab-version: R2021b  # Adjust to your MATLAB version
-          license-server: your-license-server-address  # Optional if using a network license
 
       - name: Run MATLAB Unit Tests
         run: |
