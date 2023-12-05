@@ -3,7 +3,7 @@ start,stop,out,selec,ignore,notes
 10,3,CNTtools:invalidTimeRange,,,stopBeforeStart
 1000000,1000015,CNTtools:invalidTimeRange,,,outrangeTime1
 -30,0,CNTtools:invalidTimeRange,,,outrangeTime2
-1,10,/,"{'Grid1', 'Grid2', 'Strip1','Strip2'}",,electrodeCase1
-1,10,/,,"{'Grid1', 'Grid2', 'Strip1','Strip2'}",electrodeCase2
-1,10,/,"{1,2}",,electrodeCase3
-1,10,/,,"{1,2}",electrodeCase4
+1,10,/,"['Grid1', 'Grid2', 'Strip1','Strip2']",,electrodeCase1
+1,10,/,,"['Grid1', 'Grid2', 'Strip1','Strip2']",electrodeCase2
+1,10,/,"[1,2]",,electrodeCase3
+1,10,/,,"[1,2]",electrodeCase4
