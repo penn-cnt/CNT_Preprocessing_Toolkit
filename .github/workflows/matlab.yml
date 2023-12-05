@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - './matlab/**' 
-  workflow_dispatch: 
+  #workflow_dispatch: 
 
 jobs:
   unit-tests:
@@ -27,6 +27,6 @@ jobs:
 
       - name: Run MATLAB Unit Tests
         run: |
-          matlab -batch "runtests('test','IncludeSubfolders',true)"
+          matlab -batch "runtests('test','IncludeSubfolders',true) -logfile test.log -exit"
         working-directory: ./matlab
 
