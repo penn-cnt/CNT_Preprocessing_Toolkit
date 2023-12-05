@@ -16,7 +16,10 @@ def test_auth():
     if os.getenv('GITHUB_ACTIONS'):
         config['usr'] = os.getenv('IEEG_USERNAME')
         config['pwd'] = os.getenv('IEEG_PASSWORD')
-        create_pwd_file(config["usr"], config["pwd"])
+        fname = os.path.join(settings.USER_DIR, "{}_ieeglogin.bin".format(config['usr'][:3]))
+        with open(fname, "wb") as f:
+            f.write(config['pwd'].encode())
+        print("-- -- IEEG password file saved -- --\n")
         config["pwd"] = "{}_ieeglogin.bin".format(config["usr"][:3])
         file_name = os.path.join(settings.USER_DIR, config["usr"][:3] + "_config.json")
         with open(file_name, "w") as f:
