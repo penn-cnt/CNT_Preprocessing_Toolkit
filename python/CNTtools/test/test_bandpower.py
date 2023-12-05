@@ -63,6 +63,6 @@ def test_bandpowerrela():
     bp = bandpower(data, fs, band, relative=True)
 
     # Assertions
-    assert bp.shape == (1, data.shape[1]), 'Relative band power size mismatch'
+    assert len(bp) == data.shape[1], 'Band power size mismatch'
     assert np.all(bp >= 0), 'Relative band power should be greater than or equal to zero'
     assert np.all(bp <= 1), 'Relative band power should be less than or equal to one'
