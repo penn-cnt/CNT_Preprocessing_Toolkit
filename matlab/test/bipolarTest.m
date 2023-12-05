@@ -14,7 +14,8 @@ classdef bipolarTest < matlab.unittest.TestCase
             % see https://www.mathworks.com/help/matlab/matlab_prog/types-of-qualifications.html
             % for qualification method
             addpath(genpath('./..')); % always add to ensure loading of other files/func
-            load reref_testInput.mat;
+            paths;
+            load(fullfile(TESTDATA_DIR,'reref_testInput.mat'));
             f = @() bipolar(old_values,labels);
             testCase.verifyWarningFree(f)
             [out_values,out_labels] = bipolar(old_values,labels);

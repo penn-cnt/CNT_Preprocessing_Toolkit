@@ -15,7 +15,8 @@ classdef laplacianTest < matlab.unittest.TestCase
             % see https://www.mathworks.com/help/matlab/matlab_prog/types-of-qualifications.html
             % for qualification method
             addpath(genpath('./..')); % always add to ensure loading of other files/func
-            load reref_testInput.mat;
+            paths;
+            load(fullfile(TESTDATA_DIR,'reref_testInput.mat'));
             f = @() laplacian(old_values,labels,locs,20);
             testCase.verifyWarningFree(f)
         end

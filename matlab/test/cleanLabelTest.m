@@ -5,10 +5,16 @@ classdef cleanLabelTest < matlab.unittest.TestCase
     % input, expected output, and notes describes the test scenairo of the
     % case, the notes would be used as test case names and the other three
     % would be used to run the download_ieeg_data function. 
-
     properties (TestParameter)
-        Data = mat2cell(table2cell(readtable('cleanLabel_testInput.csv','Delimiter',',')), ...
+        Data
+    end
+    methods (TestParameterDefinition, Static)
+        function Data = getData()            
+            addpath(genpath(pwd));
+            addpath(genpath([pwd '/..']));
+            Data = mat2cell(table2cell(readtable('cleanLabel_testInput.csv','Delimiter',',')), ...
             ones(size(readtable('cleanLabel_testInput.csv','Delimiter',','),1), 1), 2); 
+        end
     end
 
     %% Test Method Block

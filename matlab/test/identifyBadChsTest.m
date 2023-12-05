@@ -9,7 +9,8 @@ classdef identifyBadChsTest < matlab.unittest.TestCase
             % see https://www.mathworks.com/help/matlab/matlab_prog/types-of-qualifications.html
             % for qualification method
             addpath(genpath('./..')); % always add to ensure loading of other files/func
-            load sampleData.mat;
+            paths;
+            load(fullfile(TESTDATA_DIR,'sampleData.mat'));
             f = @() identify_bad_chs(old_values,fs);
             testCase.verifyWarningFree(f)
         end
