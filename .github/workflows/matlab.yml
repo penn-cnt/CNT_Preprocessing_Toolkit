@@ -26,7 +26,7 @@ jobs:
           IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
           IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
         run: |
-          matlab -batch "runtests('test/authTest','IncludeSubfolders',true)" 
+          matlab -batch "runtests('test','IncludeSubfolders',true)" 
           
         working-directory: ./matlab
 
