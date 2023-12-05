@@ -3,11 +3,15 @@ from .create_pwd_file import create_pwd_file
 from CNTtools import settings
 
 
-def login_config():
+def login_config(username = None, password = None):
     """Generates user .json config file using keyboard username and password inputs."""
     config = {}
-    config["usr"] = input("Please input your username: \n")
-    config["pwd"] = input("Please input your password: \n")
+    if (username is not None) and (password is not None):
+        config["usr"] = username
+        config["pwd"] = password
+    else:
+        config["usr"] = input("Please input your username: \n")
+        config["pwd"] = input("Please input your password: \n")
     create_pwd_file(config["usr"], config["pwd"])
     config["pwd"] = "{}_ieeglogin.bin".format(config["usr"][:3])
     file_name = os.path.join(settings.USER_DIR, config["usr"][:3] + "_config.json")
