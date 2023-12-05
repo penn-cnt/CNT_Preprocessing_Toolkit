@@ -12,10 +12,6 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
 
-    env:
-      IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
-      IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -26,6 +22,9 @@ jobs:
           matlab-version: R2021b  # Adjust to your MATLAB version
 
       - name: Run MATLAB Unit Tests
+        env:
+          IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
+          IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
         run: |
           matlab -batch "runtests('test','IncludeSubfolders',true) -logfile test.log -exit"
         working-directory: ./matlab
