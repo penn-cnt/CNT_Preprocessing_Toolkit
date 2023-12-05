@@ -15,7 +15,7 @@ classdef getIEEGDataTest < matlab.unittest.TestCase
     end
     methods (TestClassSetup)
         function auth(testCase)
-            runtests("authTest")
+            runtests("authTest");
         end
     end
     methods (TestParameterDefinition, Static)

@@ -10,7 +10,7 @@ classdef pipelineTest < matlab.unittest.TestCase
             % for qualification method
             addpath(genpath('./..'))
             session = iEEGPreprocess();
-            runtests("authTest")
+            runtests("authTest");
             session.login();
             data = session.download_data('I001_P034_D01', 1000,1015);
             assert(session.num_data == 1)
