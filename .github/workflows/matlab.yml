@@ -29,17 +29,17 @@ jobs:
           IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
           IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
         run: |
-          matlab -batch "import matlab.unittest.TestRunner; import matlab.unittest.TestSuite; import matlab.unittest.plugins.XMLPlugin; suite = testsuite('matlab/test','IncludeSubfolders',true); runner = TestRunner.withNoPlugins; xmlFile = 'test-results.xml'; p = XMLPlugin.producingJUnitFormat(xmlFile); runner.addPlugin(p); result = runner.run(suite); if any([result.Failed]) exit(1); end"
+          matlab -batch "import matlab.unittest.TestRunner; import matlab.unittest.TestSuite; import matlab.unittest.plugins.XMLPlugin; suite = testsuite('matlab/test','IncludeSubfolders',true); runner = TestRunner.withNoPlugins; xmlFile = 'matlab/test-results.xml'; p = XMLPlugin.producingJUnitFormat(xmlFile); runner.addPlugin(p); result = runner.run(suite); if any([result.Failed]) exit(1); end"
       
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: test_results.xml
+          path: matlab/test-results.xml
 
       - name: Display Test Results
         uses: mikepenz/action-junit-report@v4
         if: success() || failure() # always run even if the previous step fails
         with:
-          report_paths: 'test_results.xml'
+          report_paths: 'matlab/test-results.xml'
 
