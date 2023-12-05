@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - './matlab/**' 
-  workflow_dispatch: 
+  #workflow_dispatch: 
 
 jobs:
   unit-tests:
@@ -26,7 +26,19 @@ jobs:
           IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
           IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
         run: |
-          matlab -batch "runtests('test','IncludeSubfolders',true)" 
-          
-        working-directory: ./matlab
+          matlab -batch "results = runtests('test','IncludeSubfolders',true,'Output', 'xml');save('test_results.xml', 'results', '-xml');" 
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test_results.xml
+
+      - name: Display Test Results
+        run: cat test_results.xml
+
+      - name: Parse and Display Test Results
+        uses: actions/junit-report@v2
+        with:
+          path: test_results.xml
 
