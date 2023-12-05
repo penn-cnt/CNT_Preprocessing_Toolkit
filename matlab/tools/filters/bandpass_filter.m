@@ -30,7 +30,7 @@ addRequired(p, 'values', @isnumeric);
 addRequired(p, 'fs', @isnumeric);
 addOptional(p, 'low_freq', defaults{1}, @isnumeric);
 addOptional(p, 'high_freq', defaults{2}, @isnumeric);
-addOptional(p, 'order', defaults{3}, @isinteger);
+addOptional(p, 'order', defaults{3}, @isnumeric);
 
 parse(p, values, fs, varargin{:});
 
@@ -40,11 +40,10 @@ fs = p.Results.fs;
 low_freq = p.Results.low_freq;
 high_freq = p.Results.high_freq;
 order = p.Results.order;
-order = order * 2;
 
 d = designfilt('bandpassiir','FilterOrder',order, ...
     'HalfPowerFrequency1',max(low_freq,0.5),'HalfPowerFrequency2',min(floor(fs/2)-1,high_freq), ...
-    'SampleRate',fs);
+    'DesignMethod','butter','SampleRate',fs);
 
 for i = 1:size(values,2)
     eeg = values(:,i);

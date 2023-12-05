@@ -112,9 +112,15 @@ classdef iEEGPreprocess < handle
         >>> session.load_data("/path/to/saved_data.mat", replace = True)
         %}
             p = inputParser;
+            defaults = {false,true};
+            for i = 1:length(varargin)
+                if isempty(varargin{i})
+                    varargin{i} = defaults{i};
+                end
+            end
             addRequired(p, 'path', @(x) isstring(x) || ischar(x));
-            addOptional(p, 'replace',false, @(x) ismember(x,[0,1]));
-            addOptional(p, 'default_folder',true, @(x) ismember(x,[0,1]));
+            addOptional(p, 'replace',defaults{1}, @(x) ismember(x,[0,1]));
+            addOptional(p, 'default_folder',defaults{2}, @(x) ismember(x,[0,1]));
             parse(p, path, varargin{:});
             path = p.Results.path;
             replace = p.Results.replace;
@@ -205,7 +211,11 @@ classdef iEEGPreprocess < handle
             username = p.Results.username;
 
             if isempty(obj.user)
-                obj.login('username', username);
+                if ~isempty(username)
+                    obj.login(username);
+                else
+                    obj.login()
+                end
             end
             data = iEEGData(filename, start, stop, select_elecs, ignore_elecs);
             data.download(obj.user); 
@@ -224,6 +234,7 @@ classdef iEEGPreprocess < handle
             % Remove data instance from current session.
             obj.meta(dataIndex, :) = [];
             obj.datasets(dataIndex) = [];
+            obj.num_data = size(obj.meta, 1);
         end
         
         function save(obj, filename, varargin) 
