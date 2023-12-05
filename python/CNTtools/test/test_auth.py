@@ -13,8 +13,8 @@ from CNTtools.tools import create_pwd_file
 def test_auth():
     assert os.path.exists(settings.USER_DIR)
     if os.getenv('GITHUB_ACTIONS'):
-        config.usr = os.getenv('IEEG_USERNAME')
-        config.pwd = os.getenv('IEEG_PASSWORD')
+        config['usr'] = os.getenv('IEEG_USERNAME')
+        config['pwd'] = os.getenv('IEEG_PASSWORD')
         create_pwd_file(config["usr"], config["pwd"])
         config["pwd"] = "{}_ieeglogin.bin".format(config["usr"][:3])
         file_name = os.path.join(settings.USER_DIR, config["usr"][:3] + "_config.json")
