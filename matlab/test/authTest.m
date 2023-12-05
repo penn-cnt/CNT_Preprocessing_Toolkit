@@ -11,7 +11,7 @@ classdef authTest < matlab.unittest.TestCase
             assert(exist(USER_DIR,'dir') == 7);
             if ~isempty(getenv('GITHUB_ACTIONS'))
                 % Use GitHub secrets to retrieve credentials
-                config.usr = getenv('IEEG_USERNAME');
+                config.usr = getenv('IEEG_USERNAME'); 
                 config.pwd = getenv('IEEG_PASSWORD');
                 pwd_path = fullfile(USER_DIR, strcat(config.usr(1:3), '_ieeglogin.bin'));
                 PATH = IEEGSession.createPwdFile(config.usr, config.pwd, pwd_path);
