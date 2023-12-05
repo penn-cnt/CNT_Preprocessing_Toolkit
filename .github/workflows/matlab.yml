@@ -2,8 +2,11 @@ name: MATLAB Unit Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+    paths:
+      - './matlab/**' 
+  pull_request:
+    branches: [ "main" ]
     paths:
       - './matlab/**' 
   #workflow_dispatch: 
