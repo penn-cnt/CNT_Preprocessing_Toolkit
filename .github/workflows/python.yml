@@ -7,12 +7,12 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - './python/**' 
+      - 'python/**' 
   pull_request:
     branches: [ "main" ]
     paths:
-      - './python/**' 
-  # workflow_dispatch: 
+      - 'python/**' 
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -34,8 +34,11 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      working-directory: ./python
+      working-directory: python
     - name: Test with pytest
+      env:
+        IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
+        IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
       run: |
         pytest
-      working-directory: ./python
+      working-directory: python

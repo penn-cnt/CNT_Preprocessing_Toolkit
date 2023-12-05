@@ -373,6 +373,8 @@ class iEEGData:
         self.data = data
         self.fs = fs
         self.ch_names = ch_names
+        if self.ch_names is not None:
+            self.nchs = len(self.ch_names)
         self.ref_chnames = []
         self.index = None
         self.power = {}
@@ -390,6 +392,7 @@ class iEEGData:
             self.select_elecs,
             self.ignore_elecs,
         )
+        self.nchs = len(self.ch_names)
         self.raw = self.data  # store a raw version of data and channel labels
         self.raw_chs = self.ch_names
         self.username = user["usr"]
@@ -426,6 +429,7 @@ class iEEGData:
         self.nonieeg = tools.find_non_ieeg(self.ch_names)
         self.data = self.data[:, ~self.nonieeg]
         self.ch_names = self.ch_names[~self.nonieeg]
+        self.nchs = len(self.ch_names)
         self.history.append("reject_nonieeg")
 
     def reject_artifact(self):
@@ -436,6 +440,7 @@ class iEEGData:
         self.bad, self.reject_details = tools.identify_bad_chs(self.data, self.fs)
         self.data = self.data[:, ~self.bad]
         self.ch_names = self.ch_names[~self.bad]
+        self.nchs = len(self.ch_names)
         self.history.append("reject_artifact")
 
     def bandpass_filter(self, low_freq: Number = 1, high_freq: Number = 120):
@@ -494,6 +499,7 @@ class iEEGData:
         inds = np.where(self.ref_chnames == "-")[0]
         self.data = np.delete(self.data, inds, axis=1)
         self.ch_names = np.delete(self.ch_names, inds)
+        self.nchs = len(self.ch_names)
         self.ref_chnames = np.delete(self.ref_chnames, inds)
         self.history.append("bipolar")
 
@@ -531,6 +537,7 @@ class iEEGData:
         inds = np.where(self.ref_chnames == "-")[0]
         self.data = np.delete(self.data, inds, axis=1)
         self.ch_names = np.delete(self.ch_names, inds)
+        self.nchs = len(self.ch_names)
         self.ref_chnames = np.delete(self.ref_chnames, inds)
         self.history.append("laplacian")
 
@@ -574,6 +581,7 @@ class iEEGData:
             self.data = np.delete(self.data, inds, axis=1)
             self.ch_names = np.delete(self.ch_names, inds)
             self.ref_chnames = np.delete(self.ref_chnames, inds)
+        self.nchs = len(self.ch_names)
         self.history.append("reref-" + ref)
 
     def pre_whiten(self):
@@ -886,6 +894,8 @@ class iEEGData:
         if self.history:
             self.data = self._rev_data
             self.ch_names = self._rev_chs
+            if self.ch_names is not None:
+                self.nchs = len(self.ch_names)
             self.ref_chnames = self._rev_refchs
             self.history.append("reverse")
 

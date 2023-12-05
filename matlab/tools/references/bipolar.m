@@ -89,13 +89,12 @@ for ch = 1:nchs
                 break
             end
         end
-        if strcmp(label,'FZ') % exception for FZ and CZ
-            if sum(strcmp(labels(:,1),'CZ')) > 0
-                higher_ch = find(strcmp(labels(:,1),'CZ'));
-                out = old_values(:,ch)-old_values(:,higher_ch);
-                bipolar_label = [label,'-','CZ'];
-                chs_in_bipolar(ch,:) = [ch,higher_ch];
-            end
+    elseif strcmp(label,'FZ') % exception for FZ and CZ
+        if sum(strcmp(labels(:,1),'CZ')) > 0
+            higher_ch = find(strcmp(labels(:,1),'CZ'));
+            out = old_values(:,ch)-old_values(:,higher_ch);
+            bipolar_label = [label,'-','CZ'];
+            chs_in_bipolar(ch,:) = [ch,higher_ch];
         end
     end
     values(:,ch) = out;

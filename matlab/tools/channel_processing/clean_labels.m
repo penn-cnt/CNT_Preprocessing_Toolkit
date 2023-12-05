@@ -39,9 +39,8 @@ for ich = 1:length(chLabels)
         label_non_num = label(1:label_num_idx-1);
         label_num = label(label_num_idx:end);
         % Remove leading zero
-        if strcmp(label_num(1),'0')
-            label_num(1) = [];
-        end
+        inds = strcmp(cellstr(label_num'),'0');
+        label_num(inds) = [];
         label = [label_non_num,label_num];
     end
     

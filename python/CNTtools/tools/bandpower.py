@@ -40,18 +40,20 @@ def bandpower(
     band = np.asarray(band)
     assert len(band) == 2, "CNTtools:invalidBandRange"
     assert band[0] < band[1], "CNTtools:invalidBandRange"
+    if np.ndim(data) == 1:
+        data = data[:,np.newaxis]
     nchan = data.shape[1]
     bp = np.nan * np.zeros(nchan)
     low, high = band
 
     # Define window length
-    if win_size is not None:
-        nperseg = int(win_size * fs)
-    else:
-        nperseg = int((2 / low) * fs)
+    # if win_size is not None:
+    #     nperseg = int(win_size * fs)
+    # else:
+    #     nperseg = int((2 / low) * fs)
 
     # Compute the modified periodogram (Welch)
-    freqs, psd = welch(data.T, fs, nperseg=nperseg)
+    freqs, psd = welch(data.T, fs)
 
     # Frequency resolution
     freq_res = freqs[1] - freqs[0]

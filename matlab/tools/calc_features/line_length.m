@@ -23,6 +23,6 @@ x = p.Results.x;
 y = x(1:end-1,:);
 z = x(2:end,:);
 
-ll = mean(abs(z-y),1);
+ll = mean(abs(z-y),1,'omitnan');
 
 end

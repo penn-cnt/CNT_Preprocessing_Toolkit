@@ -10,7 +10,7 @@ def bandpass_filter(
     fs: Number,
     low_freq: Number = 1,
     high_freq: Number = 120,
-    order: int = 4,
+    order: int = 2,
 ) -> np.ndarray:
     """
     Apply a 4th-order Butterworth bandpass filter to input data.

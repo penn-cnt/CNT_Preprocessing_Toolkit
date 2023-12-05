@@ -29,7 +29,7 @@ p = inputParser;
 addRequired(p, 'values', @isnumeric);
 addRequired(p, 'fs', @isnumeric);
 addOptional(p, 'notch_freq', defaults{1}, @isnumeric);
-addOptional(p, 'order', defaults{2}, @isinteger);
+addOptional(p, 'order', defaults{2}, @isnumeric);
 
 parse(p, values, fs, varargin{:});
 

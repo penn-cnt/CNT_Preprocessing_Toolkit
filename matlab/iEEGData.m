@@ -47,6 +47,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
         dura
         data
         fs
+        nchs
         ch_names
         ref_chnames
         raw
@@ -94,6 +95,8 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             obj.data = p.Results.data;
             obj.fs = p.Results.fs;
             obj.ch_names = p.Results.ch_names;
+            assert(size(obj.data,2)==length(obj.ch_names));
+            obj.nchs = length(obj.ch_names);
             obj.ref_chnames = {};
             obj.index = [];
             obj.power = struct();
@@ -108,6 +111,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             obj.data = output.values;
             obj.fs = output.fs;
             obj.ch_names = output.chLabels;
+            obj.nchs = length(obj.ch_names);
             obj.raw = obj.data;
             obj.raw_chs = obj.ch_names;
             obj.username = user.usr;
@@ -142,6 +146,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             obj.nonieeg = find_non_ieeg(obj.ch_names);
             obj.data = obj.data(:, ~obj.nonieeg);
             obj.ch_names = obj.ch_names(~obj.nonieeg);
+            obj.nchs = length(obj.ch_names);
             obj.history{end + 1} = 'reject_nonieeg';
         end
 
@@ -151,6 +156,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             [obj.bad, obj.reject_details] = identify_bad_chs(obj.data, obj.fs);
             obj.data = obj.data(:, ~obj.bad);
             obj.ch_names = obj.ch_names(~obj.bad);
+            obj.nchs = length(obj.ch_names);
             obj.history{end + 1} = 'reject_artifact';
         end
 
@@ -196,9 +202,9 @@ classdef iEEGData < matlab.mixin.Copyable & handle
                 end
             end
             p = inputParser;
-            addOptional(p, 'low_freq', 1, @isnumeric);
-            addOptional(p, 'high_freq', 120, @isnumeric);
-            addOptional(p, 'notch_freq', 60, @isnumeric);
+            addOptional(p, 'low_freq', defaults{1}, @isnumeric);
+            addOptional(p, 'high_freq', defaults{2}, @isnumeric);
+            addOptional(p, 'notch_freq', defaults{3}, @isnumeric);
             parse(p, varargin{:});
             low_freq = p.Results.low_freq;
             high_freq = p.Results.high_freq;
@@ -224,6 +230,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             obj.data(:, inds) = [];
             obj.ch_names(inds) = [];
             obj.ref_chnames(inds) = [];
+            obj.nchs = length(obj.ch_names);
             obj.history{end + 1} = 'bipolar';
         end
 
@@ -271,6 +278,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             obj.data(:, inds) = [];
             obj.ch_names(inds) = [];
             obj.ref_chnames(inds) = [];
+            obj.nchs = length(obj.ch_names);
             obj.history{end + 1} = 'laplacian';
         end
 
@@ -328,6 +336,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
                     obj.ch_names(inds) = [];
                     obj.ref_chnames(inds) = [];
             end
+            obj.nchs = length(obj.ch_names);
             obj.history{end + 1} = ['reref-', ref];
         end
 
@@ -356,7 +365,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             %}
             freqs = default_freqs;
             p = inputParser;
-            defaults = {freqs,nan,false};
+            defaults = {freqs,[],false};
             for i = 1:length(varargin)
                 if isempty(varargin{i})
                     varargin{i} = defaults{i};
@@ -373,7 +382,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             nbands = size(band,1);
             for i = 1:nbands
                 obj.power(i).freq = band(i,:);
-                obj.power(i).power = bandpower(obj.data, obj.fs, obj.power(i).freq, window, relative);
+                obj.power(i).power = band_power(obj.data, obj.fs, obj.power(i).freq, window, relative);
             end
             obj.history{end + 1} = 'bandpower';
         end
@@ -634,7 +643,6 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             % or apply customized settings
             % customized color could be 1:colormap of size nX3, 
             % 2:cell/string array of color hex codes
-            nchs = size(obj.data,2); % add formula here
             
             % default colors
             blue = hex2rgb('#3c5488');red = hex2rgb('#a5474e'); white = [1,1,1]; 
@@ -653,7 +661,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             h.CellLabelColor = 'none';
             % fix figure size
             % Calculate approximate figure size
-            figureHeight = nchs * (h.FontSize) / 0.8;
+            figureHeight = obj.nchs * (h.FontSize) / 0.8;
             figureWidth = figureHeight + 50;
             h.Position = [100, 100, figureWidth, figureHeight];
             % fix colormap
@@ -714,6 +722,7 @@ classdef iEEGData < matlab.mixin.Copyable & handle
             % Reverse by one processing step.
             obj.data = obj.rev_data;
             obj.ch_names = obj.rev_chs;
+            obj.nchs = length(obj.ch_names);
             obj.ref_chnames = obj.rev_refchs;
             obj.history{end + 1} = 'reverse';
         end

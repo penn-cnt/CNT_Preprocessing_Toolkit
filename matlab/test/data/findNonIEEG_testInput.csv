@@ -1,0 +1,8 @@
+input,expected
+ECG01,1
+EKG,1
+C3,1
+CZ,1
+A1,0
+Fp1,1
+LG1,0

@@ -59,8 +59,8 @@ def bipolar(
             label_non_num = ch1[:label_num_idx]
             label_num = int(ch1[label_num_idx:])
             # find sequential index
-            if label_num > 12:
-                print("This might be a grid and so bipolar might be tricky")
+            # if label_num > 12:
+                # print("This might be a grid and so bipolar might be tricky")
             if soft:
                 ch2_num = list(range(label_num + 1, label_num + soft_thres + 2))
             else:

@@ -1,11 +1,24 @@
 % login_config.m
-function usr = login_config_base()
+function usr = login_config_base(varargin)
     % Generates user .json config file using keyboard username and password inputs.
-    paths;
+    % added variable input for testing purposes
 
+    p = inputParser;
+    addOptional(p, 'username', '', @(x) isstring(x) || ischar(x));
+    addOptional(p, 'password', '', @(x) isstring(x) || ischar(x));
+    parse(p, varargin);
+    username = p.Results.username;
+    password = p.Results.password;
+
+    paths;
     config = struct();
-    config.usr = input('Please input your username: \n', 's');
-    config.pwd = input('Please input your password: \n', 's');
+    if ~isempty(username) && ~isempty(password)
+        config.usr = username;
+        config.pwd = password;
+    else
+        config.usr = input('Please input your username: \n', 's');
+        config.pwd = input('Please input your password: \n', 's');
+    end
 
     pwd_path = fullfile(USER_DIR, strcat(config.usr(1:3), '_ieeglogin.bin'));
 
