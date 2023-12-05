@@ -29,7 +29,7 @@ jobs:
           IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
           IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
         run: |
-          matlab -batch "import matlab.unittest.TestRunner; import matlab.unittest.plugins.XMLPlugin; suite = testsuite('matlab/test','IncludeSubfolders',true); runner = TestRunner.withTextOutput; xmlFile = 'test-results.xml'; plugin = XMLPlugin.producingJUnitFormat(xmlFile); runner.addPlugin(plugin); result = run(runner, suite); if any([result.Failed]) exit(1); end"
+          matlab -batch "import matlab.unittest.TestRunner; import matlab.unittest.TestSuite; import matlab.unittest.plugins.XMLPlugin; suite = testsuite('matlab/test','IncludeSubfolders',true); runner = TestRunner.withNoPlugins; xmlFile = 'test-results.xml'; p = XMLPlugin.producingJUnitFormat(xmlFile); runner.addPlugin(p); result = runner.run(suite); if any([result.Failed]) exit(1); end"
       
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
