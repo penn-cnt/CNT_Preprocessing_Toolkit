@@ -30,15 +30,15 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      env:
-        IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
-        IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       working-directory: python
     - name: Test with pytest
+      env:
+        IEEG_USERNAME: ${{ secrets.IEEG_USERNAME }}
+        IEEG_PASSWORD: ${{ secrets.IEEG_PASSWORD }}
       run: |
         pytest
       working-directory: python
