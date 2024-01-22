@@ -298,6 +298,7 @@ classdef iEEGPreprocess < handle
             if isempty(obj.users)
                 disp('Please set up iEEG login info before downloading data.');
                 obj.login_config();
+                obj.load_all_users();
             end
         end
 

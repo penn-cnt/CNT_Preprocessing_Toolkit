@@ -28,7 +28,10 @@
 % * Fieldtrip (optional for section 4)
 
 %% set path
-filename = which('ana_pipeline.m');
+filename = mfilename('fullpath');
+if contains(filename,'LiveEditorEvaluationHelper')
+    filename = matlab.desktop.editor.getActiveFilename;
+end
 [work_path, ~, ~] = fileparts(filename);
 cd(work_path);
 addpath(genpath('.')); % this should add analysis and matlab folder
@@ -45,7 +48,7 @@ ref = struct('method',{'car';'bipolar';'laplacian'},...
             'name',{'Common average re-referencing'; 'Bipolar re-referencing';'Laplacian re-referencing'}, ...
             'col', mat2cell(hex2rgb({'#51b8bd','#de7862','#63804f'}),ones(3, 1)));
 
-ifRef = logical([1, 1, 1]); % <- make change here
+ifRef = logical([1, 1, 0]); % <- make change here
 params.ref = ref(ifRef);
 params.nRef = length(find(ifRef));
 params.LAR_loc = '';
@@ -96,11 +99,11 @@ params.longList = longNames;
 params.nSeg = 5; % <- make change here
 % 🟡dataset
 allDataset = {'HUP','MUSC'};
-params.dataset = 'MUSC'; % <- make change here
+params.dataset = 'HUP'; % <- make change here
 if exist(params.dataset,'dir') == 0
     mkdir(fullfile(work_path,params.dataset));
 end
-params.chans_to_use = 'LR'; % <- make change here, options gw, gray, white, LR
+params.chans_to_use = 'gw'; % <- make change here, options gw, gray, white, LR
 
 % print some basic characteristics
 fprintf('There are:\n');
