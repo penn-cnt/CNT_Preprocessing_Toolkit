@@ -11,7 +11,6 @@ setup(
     install_requires=[
         "pennprov",
         "pyqt5-sip",
-        "install",
         "pytest",
         "beartype",
         "pytest-html",
