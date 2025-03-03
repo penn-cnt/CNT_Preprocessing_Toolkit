@@ -14,6 +14,7 @@ setup(
         "pytest",
         "beartype",
         "pytest-html",
+        "scipy",
     ],
     packages=setuptools.find_packages(),
     package_data={
