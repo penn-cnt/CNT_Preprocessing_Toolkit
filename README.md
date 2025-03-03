@@ -8,7 +8,7 @@ Toolkit available in Matlab and Python, compatible with iEEG.org
 **pip install**
 
 ```
-pip install git+https://github.com/penn-cnt/CNT_research_tools.git#subdirectory=python
+pip install git+https://github.com/penn-cnt/CNT_Preprocessing_Toolkit.git#subdirectory=python
 ```
 
 Alternatively, download or clone the toolbox into a local folder via git, switch to folder, and pip install locally:
