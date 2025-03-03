@@ -13,7 +13,7 @@ pip install git+https://github.com/penn-cnt/CNT_Preprocessing_Toolkit.git#subdir
 
 Alternatively, download or clone the toolbox into a local folder via git, switch to folder, and pip install locally:
 ```
-git clone git@github.com:haoershi/CNT_research_tools.git
+git clone git@github.com:haoershi/CNT_Preprocessing_Toolkit.git
 cd CNT_research_tools/python
 pip install .
 ```
@@ -54,7 +54,7 @@ Toolboxes could be installed via Adds-Ons > Get Adds-Ons.
 
 Add folder _matlab_ in MATLAB working directory.
 ```\matlab
-addpath(genpath('path/CNT_research_tools/matlab'));
+addpath(genpath('path/CNT_Preprocessing_Toolkit/matlab'));
 ```
 
 **Testing**
