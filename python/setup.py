@@ -9,9 +9,9 @@ setup(
     version="0.1",
     description="Pre-processing toolkit for iEEG data",
     install_requires=[
-        "pennprov==2.2.4",
-        "pyqt5-sip==12.9.0",
-        "install==1.3.5",
+        "pennprov",
+        "pyqt5-sip",
+        "install",
         "pytest",
         "beartype",
         "pytest-html",
