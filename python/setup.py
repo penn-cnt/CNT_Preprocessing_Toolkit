@@ -15,6 +15,12 @@ setup(
         "beartype",
         "pytest-html",
         "scipy",
+        "cachetools",
+        "matplotlib",
+        "matplotlib-inline",
+        "seaborn",
+        "pytest",
+        "scikit-learn",
     ],
     packages=setuptools.find_packages(),
     package_data={
